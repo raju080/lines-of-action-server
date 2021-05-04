@@ -40,6 +40,40 @@ app.get('/', (req, res) => {
 	res.send('Hello World!');
 });
 
+
+/*
+** Game logic interaction with client
+*/
+
+app.post('/newgame', (req, res) => {
+	console.log('/newgame');
+	const boardSize = req.body.boardsize;
+	if (boardSize === '6') {
+		boardState = initialState6;
+	} else if (boardSize === '8') {
+		boardState = initialState8;
+	}
+	console.log(boardState);
+	res.status(200).send('OK');
+});
+
+app.post('/resetgame', (req, res) => {
+	console.log('/resetgame');
+	if (boardState.length === 6) {
+		boardState = initialState6;
+	} else if (boardState.length === 8) {
+		boardState = initialState8;
+	}
+	console.log(boardState);
+	res.status(200).send('OK');
+});
+
+
+/*
+** Move logics interaction with client
+*/
+
+
 app.post('/humanmove', (req, res) => {
 	console.log('/humanmove');
 	const i = req.body.i, j = req.body.j, i2 = req.body.i2, j2 = req.body.j2;

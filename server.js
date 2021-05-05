@@ -48,22 +48,34 @@ app.get('/', (req, res) => {
 app.post('/newgame', (req, res) => {
 	console.log('/newgame');
 	const boardSize = req.body.boardsize;
+	let tempBoardState = [];
 	if (boardSize === '6') {
-		boardState = initialState6;
+		initialState6.forEach((row) => {
+			tempBoardState.push(row.slice());
+		});
 	} else if (boardSize === '8') {
-		boardState = initialState8;
+		initialState8.forEach((row) => {
+			tempBoardState.push(row.slice());
+		});
 	}
+	boardState = tempBoardState;
 	console.log(boardState);
 	res.status(200).send('OK');
 });
 
-app.post('/resetgame', (req, res) => {
+app.get('/resetgame', (req, res) => {
 	console.log('/resetgame');
+	let tempBoardState = [];
 	if (boardState.length === 6) {
-		boardState = initialState6;
+		initialState6.forEach((row) => {
+			tempBoardState.push(row.slice());
+		});
 	} else if (boardState.length === 8) {
-		boardState = initialState8;
+		initialState8.forEach((row) => {
+			tempBoardState.push(row.slice());
+		});
 	}
+	boardState = tempBoardState;
 	console.log(boardState);
 	res.status(200).send('OK');
 });
